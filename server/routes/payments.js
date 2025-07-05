@@ -69,8 +69,8 @@ router.post('/create-checkout-session', auth, async (req, res) => {
         },
       ],
       mode: 'payment',
-      success_url: `${process.env.CLIENT_URL || 'http://localhost:5173'}/premium?success=true&session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${process.env.CLIENT_URL || 'http://localhost:5173'}/premium?canceled=true`,
+      success_url: `https://with-my-women.onrender.com/premium?success=true&session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `https://with-my-women.onrender.com/premium?canceled=true`,
       metadata: {
         userId: req.user.id,
         tier: tier,
@@ -120,8 +120,8 @@ router.post('/create-paypal-order', auth, async (req, res) => {
         brand_name: 'With My Women',
         landing_page: 'LOGIN',
         user_action: 'PAY_NOW',
-        return_url: `${process.env.CLIENT_URL || 'http://localhost:5173'}/premium?success=true&order_id={order_id}`,
-        cancel_url: `${process.env.CLIENT_URL || 'http://localhost:5173'}/premium?canceled=true`,
+        return_url: `https://with-my-women.onrender.com/premium?success=true&order_id={order_id}`,
+        cancel_url: `https://with-my-women.onrender.com/premium?canceled=true`,
       },
     });
 
