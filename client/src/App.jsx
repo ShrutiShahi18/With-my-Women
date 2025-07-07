@@ -1,5 +1,5 @@
 import React from 'react';
-import { HashRouter as Router, Routes, Route } from 'react-router-dom';
+import { HashRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import './App.css';
 
 // Context
@@ -48,12 +48,12 @@ const Home = () => {
         </div>
 
         <div className="text-center">
-          <a
-            href="/blog"
+          <Link
+            to="/blog"
             className="bg-gradient-to-r from-pink-500 to-purple-600 text-white font-bold py-3 px-8 rounded-full hover:from-pink-600 hover:to-purple-700 transition-all transform hover:scale-105 inline-block"
           >
             Get Started
-          </a>
+          </Link>
         </div>
       </div>
     </div>
