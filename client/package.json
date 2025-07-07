@@ -23,9 +23,10 @@
   },
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "npx vite build",
     "preview": "vite preview",
-    "test": "vitest"
+    "test": "vitest",
+    "postinstall": "chmod +x node_modules/.bin/vite"
   },
   "eslintConfig": {
     "extends": [
