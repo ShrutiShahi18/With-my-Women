@@ -4,11 +4,14 @@ import './tailwind.css';
 import './index.css';
 import App from './App.jsx';
 import reportWebVitals from './reportWebVitals.jsx';
+import { AuthProvider } from './context/AuthContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <AuthProvider>
+      <App />
+    </AuthProvider>
   </React.StrictMode>
 );
 

@@ -16,7 +16,7 @@ const CreateBlog = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    await api.post('/api/blogs', { title, content, image });
+    await api.post('/blogs', { title, content, image });
     setLoading(false);
     navigate('/');
   };

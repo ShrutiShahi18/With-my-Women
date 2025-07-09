@@ -14,7 +14,7 @@ const BlogDetail = () => {
   const navigate = useNavigate();
 
   const fetchBlog = () => {
-    api.get(`/api/blogs/${id}`).then(res => {
+    api.get(`/blogs/${id}`).then(res => {
       setBlog(res.data);
       setLoading(false);
     });
@@ -27,14 +27,14 @@ const BlogDetail = () => {
 
   const handleLike = async () => {
     setLikeLoading(true);
-    await api.put(`/api/blogs/${id}/like`);
+    await api.put(`/blogs/${id}/like`);
     fetchBlog();
     setLikeLoading(false);
   };
 
   const handleDelete = async () => {
     if (window.confirm('Delete this post?')) {
-      await api.delete(`/api/blogs/${id}`);
+      await api.delete(`/blogs/${id}`);
       navigate('/');
     }
   };
@@ -42,7 +42,7 @@ const BlogDetail = () => {
   const handleComment = async (e) => {
     e.preventDefault();
     setCommentLoading(true);
-    await api.post(`/api/blogs/${id}/comments`, { content: comment });
+    await api.post(`/blogs/${id}/comments`, { content: comment });
     setComment('');
     fetchBlog();
     setCommentLoading(false);
@@ -50,7 +50,7 @@ const BlogDetail = () => {
 
   const handleDeleteComment = async (commentId) => {
     if (window.confirm('Delete this comment?')) {
-      await api.delete(`/api/comments/${commentId}`);
+      await api.delete(`/comments/${commentId}`);
       fetchBlog();
     }
   };

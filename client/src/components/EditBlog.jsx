@@ -14,7 +14,7 @@ const EditBlog = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    api.get(`/api/blogs/${id}`).then(res => {
+    api.get(`/blogs/${id}`).then(res => {
       setTitle(res.data.title);
       setContent(res.data.content);
       setImage(res.data.image || '');
@@ -28,7 +28,7 @@ const EditBlog = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setSaving(true);
-    await api.put(`/api/blogs/${id}`, { title, content, image });
+    await api.put(`/blogs/${id}`, { title, content, image });
     setSaving(false);
     navigate(`/blogs/${id}`);
   };

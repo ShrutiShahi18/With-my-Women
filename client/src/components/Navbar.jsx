@@ -34,33 +34,27 @@ const Navbar = () => {
               Home
             </Link>
             <Link
-              to="/blog"
+              to="/blogs"
               className="text-gray-700 hover:text-purple-600 transition-colors"
             >
-              Stories
+              Blogs
             </Link>
             {isPremium && (
               <>
                 <Link
-                  to="/chat"
+                  to="/premium"
                   className="text-gray-700 hover:text-purple-600 transition-colors"
                 >
-                  Chat Room
+                  Premium
                 </Link>
                 <Link
-                  to="/premium/content"
+                  to="/premium-content"
                   className="text-gray-700 hover:text-purple-600 transition-colors"
                 >
                   Premium Content
                 </Link>
               </>
             )}
-            <Link
-              to="/premium"
-              className="text-gray-700 hover:text-purple-600 transition-colors"
-            >
-              Premium
-            </Link>
           </div>
 
           {/* User Menu */}
@@ -156,36 +150,25 @@ const Navbar = () => {
                 Home
               </Link>
               <Link
-                to="/blog"
+                to="/blogs"
                 className="block px-3 py-2 text-gray-700 hover:text-purple-600 transition-colors"
                 onClick={() => setIsMenuOpen(false)}
               >
-                Stories
+                Blogs
               </Link>
-              {isPremium && (
-                <>
-                  <Link
-                    to="/chat"
-                    className="block px-3 py-2 text-gray-700 hover:text-purple-600 transition-colors"
-                    onClick={() => setIsMenuOpen(false)}
-                  >
-                    Chat Room
-                  </Link>
-                  <Link
-                    to="/premium/content"
-                    className="block px-3 py-2 text-gray-700 hover:text-purple-600 transition-colors"
-                    onClick={() => setIsMenuOpen(false)}
-                  >
-                    Premium Content
-                  </Link>
-                </>
-              )}
               <Link
                 to="/premium"
                 className="block px-3 py-2 text-gray-700 hover:text-purple-600 transition-colors"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Premium
+              </Link>
+              <Link
+                to="/premium-content"
+                className="block px-3 py-2 text-gray-700 hover:text-purple-600 transition-colors"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Premium Content
               </Link>
               
               {isAuthenticated ? (

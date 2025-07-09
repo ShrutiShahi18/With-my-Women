@@ -11,13 +11,15 @@ import UserProfile from './components/UserProfile';
 import Premium from './components/Premium';
 import PremiumContent from './components/PremiumContent';
 import ChatbotWidget from './components/ChatbotWidget';
+import Home from './components/Home';
 
 function App() {
   return (
     <Router>
       <Navbar />
       <Routes>
-        <Route path="/" element={<BlogList />} />
+        <Route path="/" element={<Home />} />
+        <Route path="/blogs" element={<BlogList />} />
         <Route path="/blogs/:id" element={<BlogDetail />} />
         <Route path="/create" element={<CreateBlog />} />
         <Route path="/edit/:id" element={<EditBlog />} />

@@ -9,7 +9,7 @@ const BlogList = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    api.get('/api/blogs').then(res => {
+    api.get('/blogs').then(res => {
       setBlogs(res.data);
       setLoading(false);
     });
@@ -19,6 +19,15 @@ const BlogList = () => {
 
   return (
     <div className="max-w-2xl mx-auto p-4">
+      {!user && (
+        <div className="bg-pink-50 border border-pink-200 rounded p-4 mb-6 text-center">
+          <span className="text-pink-700 font-semibold">Want to share your story or join the conversation?</span>
+          <div className="mt-2 flex justify-center gap-4">
+            <Link to="/login" className="bg-pink-500 text-white px-4 py-2 rounded hover:bg-pink-600">Login</Link>
+            <Link to="/register" className="bg-purple-500 text-white px-4 py-2 rounded hover:bg-purple-600">Sign Up</Link>
+          </div>
+        </div>
+      )}
       <div className="flex justify-between items-center mb-4">
         <h1 className="text-2xl font-bold">Blog Posts</h1>
         {user && <Link to="/create" className="bg-pink-500 text-white px-4 py-2 rounded">Create Post</Link>}
