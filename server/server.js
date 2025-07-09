@@ -19,13 +19,9 @@ const mongoose = require('mongoose');
 const app = express();
 
 // Middleware
-app.use(cors({
-  origin: 'https://with-my-women-frontend.onrender.com'
-}));
-app.options('*', cors({
-  origin: 'https://with-my-women-frontend.onrender.com'
-}));
-console.log('CORS enabled for https://with-my-women-frontend.onrender.com');
+app.use(cors());
+app.options('*', cors());
+console.log('CORS enabled for ALL origins (debug mode)');
 app.use(express.json());
 
 // Routes
@@ -51,7 +47,9 @@ const MONGO_URI = process.env.MONGO_URI;
 mongoose.connect(MONGO_URI)
   .then(() => {
     console.log('✅ MongoDB connected');
-    app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
+    app.listen(PORT, () => {
+      console.log(`Server running on port ${PORT}`);
+    });
   })
   .catch((err) => {
     console.error('❌ MongoDB connection error:', err.message);
