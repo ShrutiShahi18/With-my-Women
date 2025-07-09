@@ -15,6 +15,13 @@ const BlogList = () => {
     });
   }, []);
 
+  const handleDelete = async (id) => {
+    if (window.confirm('Are you sure you want to delete this post?')) {
+      await api.delete(`/blogs/${id}`);
+      setBlogs(blogs.filter(blog => blog._id !== id));
+    }
+  };
+
   if (loading) return <div>Loading...</div>;
 
   return (
@@ -37,10 +44,23 @@ const BlogList = () => {
       ) : (
         blogs.map(blog => (
           <div key={blog._id} className="bg-white rounded shadow p-4 mb-4">
+            {blog.image && (
+              <img src={blog.image} alt="Blog" className="mb-2 w-full max-h-48 object-cover rounded" />
+            )}
             <Link to={`/blogs/${blog._id}`} className="text-xl font-semibold text-pink-600 hover:underline">{blog.title}</Link>
             <div className="text-gray-500 text-sm">By {blog.author?.name || 'Unknown'} | {blog.likes.length} Likes</div>
             <div className="mt-2 text-gray-700 line-clamp-2">{blog.content}</div>
-            <Link to={`/blogs/${blog._id}`} className="text-pink-500 hover:underline text-sm mt-2 inline-block">Read more</Link>
+            <div className="flex items-center gap-2 mt-2">
+              <Link to={`/blogs/${blog._id}`} className="text-pink-500 hover:underline text-sm">Read more</Link>
+              {user && blog.author?._id === user._id && (
+                <button
+                  onClick={() => handleDelete(blog._id)}
+                  className="ml-2 text-red-500 hover:underline text-sm"
+                >
+                  Delete
+                </button>
+              )}
+            </div>
           </div>
         ))
       )}
