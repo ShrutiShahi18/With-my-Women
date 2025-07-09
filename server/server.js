@@ -29,11 +29,13 @@ const authRoutes = require('./routes/auth');
 const blogRoutes = require('./routes/blogs');
 const paymentRoutes = require('./routes/payments');
 const chatRoutes = require('./routes/chat');
+const commentsRoutes = require('./routes/comments');
 
 app.use('/api/auth', authRoutes);
 app.use('/api/blogs', blogRoutes);
 app.use('/api/payments', paymentRoutes);
 app.use('/api/chat', chatRoutes);
+app.use('/api/comments', commentsRoutes);
 
 // Special handling for Stripe webhooks (needs raw body)
 app.use('/api/payments/stripe-webhook', express.raw({ type: 'application/json' }));

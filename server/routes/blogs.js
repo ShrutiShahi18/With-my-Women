@@ -2,6 +2,7 @@ const express = require('express');
 const auth = require('../middleware/auth');
 const Blog = require('../models/Blog');
 const User = require('../models/User');
+const Comment = require('../models/Comment');
 const router = express.Router();
 
 // @route   GET /api/blogs
@@ -11,6 +12,7 @@ router.get('/', async (req, res) => {
     const blogs = await Blog.find()
       .populate('author', ['name'])
       .populate('likes', ['name'])
+      .populate({ path: 'comments', populate: { path: 'author', select: 'name' } })
       .sort({ createdAt: -1 });
     res.json(blogs);
   } catch (err) {
@@ -25,7 +27,8 @@ router.get('/:id', async (req, res) => {
   try {
     const blog = await Blog.findById(req.params.id)
       .populate('author', ['name'])
-      .populate('likes', ['name']);
+      .populate('likes', ['name'])
+      .populate({ path: 'comments', populate: { path: 'author', select: 'name' } });
     
     if (!blog) {
       return res.status(404).json({ message: 'Blog not found' });
@@ -45,11 +48,12 @@ router.get('/:id', async (req, res) => {
 // @desc    Create a new blog
 router.post('/', auth, async (req, res) => {
   try {
-    const { title, content } = req.body;
+    const { title, content, image } = req.body;
 
     const newBlog = new Blog({
       title,
       content,
+      image,
       author: req.user.id,
     });
 
@@ -149,6 +153,30 @@ router.put('/:id/like', auth, async (req, res) => {
     if (err.kind === 'ObjectId') {
       return res.status(404).json({ message: 'Blog not found' });
     }
+    res.status(500).send('Server error');
+  }
+});
+
+// Add comment to a blog post
+router.post('/:id/comments', auth, async (req, res) => {
+  try {
+    const { content } = req.body;
+    const blog = await Blog.findById(req.params.id);
+    if (!blog) {
+      return res.status(404).json({ message: 'Blog not found' });
+    }
+    const comment = new Comment({
+      content,
+      author: req.user.id,
+      blog: blog._id
+    });
+    await comment.save();
+    blog.comments.push(comment._id);
+    await blog.save();
+    await comment.populate('author', 'name');
+    res.json(comment);
+  } catch (err) {
+    console.error(err.message);
     res.status(500).send('Server error');
   }
 });
