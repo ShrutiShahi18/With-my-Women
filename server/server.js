@@ -22,6 +22,10 @@ const app = express();
 app.use(cors({
   origin: 'https://with-my-women-frontend.onrender.com'
 }));
+app.options('*', cors({
+  origin: 'https://with-my-women-frontend.onrender.com'
+}));
+console.log('CORS config loaded for https://with-my-women-frontend.onrender.com');
 app.use(express.json());
 
 // Routes
