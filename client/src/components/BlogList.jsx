@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import api from '../services/api';
 
@@ -7,6 +7,7 @@ const BlogList = () => {
   const [blogs, setBlogs] = useState([]);
   const { user } = useAuth();
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
     api.get('/blogs').then(res => {
@@ -53,12 +54,20 @@ const BlogList = () => {
             <div className="flex items-center gap-2 mt-2">
               <Link to={`/blogs/${blog._id}`} className="text-pink-500 hover:underline text-sm">Read more</Link>
               {user && blog.author?._id === user._id && (
-                <button
-                  onClick={() => handleDelete(blog._id)}
-                  className="ml-2 text-red-500 hover:underline text-sm"
-                >
-                  Delete
-                </button>
+                <>
+                  <button
+                    onClick={() => navigate(`/edit/${blog._id}`)}
+                    className="ml-2 bg-yellow-400 text-white px-2 py-1 rounded text-sm hover:bg-yellow-500"
+                  >
+                    Edit
+                  </button>
+                  <button
+                    onClick={() => handleDelete(blog._id)}
+                    className="ml-2 bg-red-500 text-white px-2 py-1 rounded text-sm hover:bg-red-600"
+                  >
+                    Delete
+                  </button>
+                </>
               )}
             </div>
           </div>
