@@ -8,7 +8,10 @@ export default defineConfig({
   base: './',
   server: {
     port: 3000,
-    open: true
+    open: true,
+    proxy: {
+      '/api': 'http://localhost:5000', // Change 5000 to your backend port if different
+    },
   },
   build: {
     outDir: 'build',
