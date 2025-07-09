@@ -15,6 +15,7 @@ import ChatRoom from './components/ChatRoom.jsx';
 import Premium from './components/Premium.jsx';
 import PremiumContent from './components/PremiumContent.jsx';
 import UserProfile from './components/UserProfile.jsx';
+import ChatbotWidget from './components/ChatbotWidget.jsx';
 
 // Home component (existing content)
 const Home = () => {
@@ -77,6 +78,7 @@ function App() {
             <Route path="/chat" element={<ChatRoom />} />
             <Route path="/profile" element={<UserProfile />} />
           </Routes>
+          <ChatbotWidget />
         </div>
       </Router>
     </AuthProvider>
