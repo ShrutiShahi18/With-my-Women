@@ -76,12 +76,6 @@ A fully functional blog application built with a clean, respectful UI. Users can
 
 ---
 
-## Live Demo
-- **Frontend:** [https://with-my-women-frontend.onrender.com](https://with-my-women-frontend.onrender.com)
-- **Backend:** [https://with-my-women-api.onrender.com](https://with-my-women-api.onrender.com)
-
----
-
 ## API Documentation (Summary)
 - `POST /api/auth/register` — Register a new user
 - `POST /api/auth/login` — Login
