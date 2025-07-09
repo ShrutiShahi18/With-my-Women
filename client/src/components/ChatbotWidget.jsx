@@ -9,6 +9,10 @@ const ChatbotWidget = () => {
   const [loading, setLoading] = useState(false);
   const messagesEndRef = useRef(null);
 
+  const API_BASE = process.env.NODE_ENV === 'production'
+    ? 'https://with-my-women-api.onrender.com'
+    : '';
+
   const handleSend = async (e) => {
     e.preventDefault();
     if (!input.trim()) return;
@@ -17,7 +21,7 @@ const ChatbotWidget = () => {
     setInput('');
     setLoading(true);
     try {
-      const res = await fetch('/api/chat', {
+      const res = await fetch(`${API_BASE}/api/chat`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ message: input })
