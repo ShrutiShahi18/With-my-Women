@@ -20,12 +20,11 @@ const app = express();
 
 // Middleware
 app.use(cors({
-  origin: 'https://with-my-women-frontend.onrender.com'
+  origin: 'https://with-my-women-frontend.onrender.com',
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  credentials: true
 }));
-app.options('*', cors({
-  origin: 'https://with-my-women-frontend.onrender.com'
-}));
-console.log('CORS enabled for https://with-my-women-frontend.onrender.com');
+console.log('CORS enabled for https://with-my-women-frontend.onrender.com with credentials and methods');
 app.use(express.json());
 
 // Routes
