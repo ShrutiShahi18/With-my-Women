@@ -19,9 +19,13 @@ const mongoose = require('mongoose');
 const app = express();
 
 // Middleware
-app.use(cors());
-app.options('*', cors());
-console.log('CORS config loaded for ALL origins');
+app.use(cors({
+  origin: 'https://with-my-women-frontend.onrender.com'
+}));
+app.options('*', cors({
+  origin: 'https://with-my-women-frontend.onrender.com'
+}));
+console.log('CORS enabled for https://with-my-women-frontend.onrender.com');
 app.use(express.json());
 
 // Routes
